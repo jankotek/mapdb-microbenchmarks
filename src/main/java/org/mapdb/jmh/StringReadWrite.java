@@ -37,9 +37,10 @@ public class StringReadWrite {
 
         // Optimize for the common case where value is small. This is particular important where our caller
         // is SerializerBase.SER_STRING.serialize because most chars will be ASCII characters and hence in this range.
-        if ((value & ~0x7F) != 0) {
+        int shift = (value & ~0x7F);
+        if ( shift!= 0) {
             //$DELAY$
-            int shift = 31-Integer.numberOfLeadingZeros(value);
+            shift = 31-Integer.numberOfLeadingZeros(value);
             shift -= shift%7; // round down to nearest multiple of 7
             while(shift!=0){
                 buf[pos++] = ((byte) (((value>>>shift) & 0x7F) | 0x80));
