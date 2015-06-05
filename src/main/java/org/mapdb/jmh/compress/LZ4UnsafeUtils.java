@@ -1,4 +1,4 @@
-package org.mapdb.jmg.compress;
+package org.mapdb.jmh.compress;
 
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");

@@ -69,12 +69,14 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.mapdb.jmg.compress;
+package org.mapdb.jmh.compress;
 
 import net.jpountz.util.UnsafeUtils;
+import sun.misc.Unsafe;
 
 import java.io.DataInput;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 
 /**
@@ -398,16 +400,17 @@ public final class CompressLZF{
     }
 
 
+    /** !!!   NOTE !!! this method is broken, it just demonstrates possible maximal speed of LZV decompression */
     public void expandUnsafe(byte[] in, int inPos, byte[] out, int outPos, int outLen) {
         // if ((inPos | outPos | outLen) < 0) {
         int ctrl,len;
         do {
-            ctrl = UnsafeUtils.readByte(in,inPos++) & 255;
+            ctrl = UnsafeUtils.readByte(in, inPos++) & 255;
             if (ctrl < MAX_LITERAL) {
                 // literal run of length = ctrl + 1,
 
                 // copy to output and move forward this many bytes
-                LZ4UnsafeUtils.safeArraycopy(in, inPos, out, outPos, ctrl++);
+                LZ4UnsafeUtils.wildArraycopy(in, inPos, out, outPos, ctrl++);
                 outPos += ctrl;
                 inPos += ctrl;
                 continue;
@@ -433,13 +436,16 @@ public final class CompressLZF{
                 // copy the back-reference bytes from the given
                 // location in output to current position
                 ctrl += outPos;
-                if (outPos + len >= out.length) {
-                    // reduce array bounds checking
-                    throw new ArrayIndexOutOfBoundsException();
-                }
+
+//                for (int i = 0; i < len; i++) {
+//                    out[outPos++] = out[ctrl++];
+//                }
+            //we should check for overlaps, but for sake of simplicy lets copy memory
+                LZ4UnsafeUtils.wildArraycopy(out, outPos, out, ctrl, len);
+                outPos+=len;
+
 
         } while (outPos < outLen);
     }
-
 
 }

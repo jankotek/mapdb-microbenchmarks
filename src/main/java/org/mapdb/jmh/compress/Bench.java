@@ -1,14 +1,10 @@
-package org.mapdb.jmg.compress;
+package org.mapdb.jmh.compress;
 
 import net.jpountz.lz4.LZ4Compressor;
 import net.jpountz.lz4.LZ4Factory;
 import net.jpountz.lz4.LZ4FastDecompressor;
-import net.jpountz.lz4.LZ4SafeDecompressor;
 import org.openjdk.jmh.annotations.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.TimeUnit;
 
 
