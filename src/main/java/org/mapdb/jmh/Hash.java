@@ -11,10 +11,7 @@ public class Hash {
     final long t1 = System.nanoTime();
     final int t2 = (int) System.nanoTime();
 
-    {
-        System.out.println(Integer.toBinaryString(-1640531527));
-        System.out.println(Long.toBinaryString(-7046029254386353131L));
-    }
+
     @Benchmark public long longHash(){
         long t = t1;
         //use cycle with recursive hash to prevent compiler from caching hash results
