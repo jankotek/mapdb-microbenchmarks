@@ -28,6 +28,7 @@ public class HeadChecksum {
         return crc.getValue();
     }
 
+
     @Benchmark public long adler32(){
         adler.reset();
         adler.update(data, 0, data.length);
@@ -56,10 +57,20 @@ public class HeadChecksum {
         byte[] data = this.data;
         long res = 0;
         for(int offset = 0; offset<data.length;offset+=8){
-            res += offset + getLong(data,offset);
+            res += offset + getLong(data, offset);
         }
         return res;
     }
+
+    @Benchmark  public long longSafePlus3(){
+        byte[] data = this.data;
+        long res = 0;
+        for(int offset = 0; offset<data.length;offset+=8){
+            res += -7046029254386353131L*(offset + getLong(data, offset));
+        }
+        return res;
+    }
+
 
     public static long getLong(byte[] buf, int pos) {
         return
@@ -72,6 +83,15 @@ public class HeadChecksum {
                         (((long)buf[pos++] & 0xFF) <<  8) |
                         (((long)buf[pos] & 0xFF)));
 
+    }
+
+
+    public static int getInt(byte[] buf, int pos) {
+        return
+                        (((int)buf[pos++] & 0xFF) << 24) |
+                        (((int)buf[pos++] & 0xFF) << 16) |
+                        (((int)buf[pos++] & 0xFF) <<  8) |
+                        (((int)buf[pos] & 0xFF));
     }
 
 
