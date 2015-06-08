@@ -26,7 +26,7 @@ import static net.jpountz.util.Utils.NATIVE_BYTE_ORDER;
 
 import java.nio.ByteOrder;
 
-enum LZ4UnsafeUtils {
+public enum LZ4UnsafeUtils {
   ;
 
   static void safeArraycopy(byte[] src, int srcOff, byte[] dest, int destOff, int len) {
