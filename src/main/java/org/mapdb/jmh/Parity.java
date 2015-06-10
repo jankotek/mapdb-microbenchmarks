@@ -16,6 +16,7 @@ import java.util.zip.CRC32;
 @Measurement(iterations = 3)
 public class Parity {
 
+    long par = System.nanoTime() &0xFFFFFFF00000L;
 
     public static long parity1Set(long i) {
         return i | ((Long.bitCount(i)+1)%2);
@@ -75,16 +76,16 @@ public class Parity {
 
 
     @Benchmark public long parity1(){
-        return parity1Get(parity1Set(0xFFFFF00000L));
+        return parity1Get(parity1Set(par));
     }
 
     @Benchmark public long parity3(){
-        return parity3Get(parity3Set(0xFFFFF00000L));
+        return parity3Get(parity3Set(par));
     }
     @Benchmark public long parity4(){
-        return parity4Get(parity4Set(0xFFFFF00000L));
+        return parity4Get(parity4Set(par));
     }
     @Benchmark public long parity8(){
-        return parity16Get(parity16Set(0xFFFFF00000L));
+        return parity16Get(parity16Set(par));
     }
 }
