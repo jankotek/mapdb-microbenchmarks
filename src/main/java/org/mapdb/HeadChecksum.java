@@ -1,4 +1,4 @@
-package org.mapdb.jmh;
+package org.mapdbd;
 
 
 import net.jpountz.lz4.LZ4Factory;

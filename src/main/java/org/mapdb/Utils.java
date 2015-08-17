@@ -1,4 +1,4 @@
-package org.mapdb.jmh;
+package org.mapdb;
 
 import sun.misc.Unsafe;
 

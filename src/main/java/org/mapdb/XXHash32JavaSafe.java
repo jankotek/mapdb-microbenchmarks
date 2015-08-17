@@ -1,12 +1,12 @@
 // Auto-generated: DO NOT EDIT
 
-package org.mapdb.jmh;
+package org.mapdb;
 
 import net.jpountz.util.SafeUtils;
 import net.jpountz.xxhash.XXHash32;
 
 import static java.lang.Integer.rotateLeft;
-import static org.mapdb.jmh.XXHashConstants.*;
+import static org.mapdb.XXHashConstants.*;
 
 /**
  * {@link XXHash32} implementation.

@@ -1,13 +1,11 @@
-package org.mapdb.jmh;
+package org.mapdb;
 
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 
-import java.io.DataOutput;
 import java.io.IOException;
-import java.io.UTFDataFormatException;
 
 @State(Scope.Thread)
 public class StringReadWrite {
