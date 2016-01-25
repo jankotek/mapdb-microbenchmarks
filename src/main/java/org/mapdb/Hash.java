@@ -1,4 +1,4 @@
-package org.mapdd;
+package org.mapdb;
 
 import org.openjdk.jmh.annotations.*;
 
