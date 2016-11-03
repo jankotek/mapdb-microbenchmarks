@@ -22,7 +22,7 @@ public class UnsafeMmap {
 
     public UnsafeMmap() {
         try {
-            File f = new File("/mnt/test/mapdb"+System.currentTimeMillis());//File.createTempFile("mapdb", "mapdb");
+            File f = File.createTempFile("mapdb", "mapdb");
             f.deleteOnExit();
             OutputStream o = new FileOutputStream(f);
             byte[] b = new byte[1024];
